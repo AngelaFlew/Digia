@@ -2,24 +2,28 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 const HomeScreen = () => {
+  const [formData, setFormData] = useState('');
   const [name, setName] = useState('');
 
-  const handleNameChange = (text) => {
-    setName(text);
+  const handleFormData = (text) => {
+    setFormData(text);
   };
 
   const handleSubmit = () => {
-    console.log(`Hello, ${name}!`);
+    setName(formData);
+    setFormData("");
   };
 
-  return (
+  return(
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome to Digia, your digital diary.</Text>
+      <Text style={styles.title}>
+        { !name ? "Welcome to Digia, your digital diary." : `Hello, ${name}!` }
+      </Text>
       <Text style={styles.subtitle}>What is your name?</Text>
       <TextInput
         style={styles.input}
         placeholder="Enter your name"
-        onChangeText={handleNameChange}
+        onChangeText={handleFormData}
       />
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Submit</Text>
